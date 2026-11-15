@@ -1,0 +1,2106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BO Visit Questionnaire - Dhemaji Sub Division | Department of Posts</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Inter & Merriweather for Official Headers -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:wght@700;900&display=swap" rel="stylesheet">
+  <!-- html2pdf.js for direct client-side PDF file download -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            postRed: {
+              50: '#fef2f2',
+              100: '#fee2e2',
+              600: '#dc2626',
+              700: '#b91c1c',
+              800: '#991b1b',
+              900: '#7f1d1d',
+            },
+            postGold: {
+              400: '#fbbf24',
+              500: '#f59e0b',
+              600: '#d97706',
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            serif: ['Merriweather', 'serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Custom Scrollbar & Form Polish */
+    body {
+      background-color: #f8fafc;
+      color: #0f172a;
+    }
+
+    .form-input, .form-select, .form-textarea {
+      width: 100%;
+      border: 1px solid #cbd5e1;
+      border-radius: 0.375rem;
+      padding: 0.45rem 0.65rem;
+      font-size: 0.875rem;
+      line-height: 1.25rem;
+      background-color: #ffffff;
+      color: #0f172a;
+      transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    }
+
+    .form-input:focus, .form-select:focus, .form-textarea:focus {
+      outline: none;
+      border-color: #b91c1c;
+      box-shadow: 0 0 0 3px rgba(185, 28, 28, 0.15);
+    }
+
+    .form-input[readonly] {
+      background-color: #f1f5f9;
+      font-weight: 700;
+      color: #1e293b;
+    }
+
+    /* Official Table Styling */
+    .official-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+    }
+
+    .official-table th, .official-table td {
+      border: 1px solid #cbd5e1;
+      padding: 0.5rem 0.6rem;
+      vertical-align: top;
+    }
+
+    .official-table th {
+      background-color: #f1f5f9;
+      font-weight: 700;
+      color: #1e293b;
+      text-align: left;
+    }
+
+    /* Print / PDF Export Mode Styling */
+    body.pdf-export-mode {
+      background-color: #ffffff !important;
+    }
+
+    body.pdf-export-mode .no-print {
+      display: none !important;
+    }
+
+    body.pdf-export-mode #printableArea {
+      max-width: 100% !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      box-shadow: none !important;
+      border: none !important;
+    }
+
+    body.pdf-export-mode .section-card {
+      box-shadow: none !important;
+      border: 1px solid #64748b !important;
+      margin-bottom: 1rem !important;
+      break-inside: avoid-page;
+    }
+
+    body.pdf-export-mode .form-input,
+    body.pdf-export-mode .form-select,
+    body.pdf-export-mode .form-textarea {
+      border: none !important;
+      border-bottom: 1px dotted #475569 !important;
+      border-radius: 0 !important;
+      padding: 0.15rem 0.2rem !important;
+      background: transparent !important;
+      font-size: 0.8rem !important;
+      appearance: none !important;
+      -webkit-appearance: none !important;
+      resize: none !important;
+    }
+
+    body.pdf-export-mode .official-table th,
+    body.pdf-export-mode .official-table td {
+      border: 1px solid #334155 !important;
+      padding: 0.3rem 0.4rem !important;
+      font-size: 0.78rem !important;
+    }
+
+    /* Native Browser @media print for crisp multi-page vector PDF */
+    @media print {
+      @page {
+        size: A4 portrait;
+        margin: 10mm 10mm 12mm 10mm;
+      }
+
+      body {
+        background-color: #ffffff !important;
+        color: #000000 !important;
+        font-size: 11px !important;
+      }
+
+      .no-print {
+        display: none !important;
+      }
+
+      #printableArea {
+        max-width: 100% !important;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        box-shadow: none !important;
+      }
+
+      .section-card {
+        display: block !important;
+        box-shadow: none !important;
+        border: 1px solid #000 !important;
+        margin-bottom: 12px !important;
+        border-radius: 4px !important;
+      }
+
+      .section-header-bar {
+        background-color: #e2e8f0 !important;
+        color: #000 !important;
+        border-bottom: 1px solid #000 !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .official-table th,
+      .official-table td {
+        border: 1px solid #000000 !important;
+        padding: 4px 5px !important;
+        font-size: 10.5px !important;
+      }
+
+      .official-table th {
+        background-color: #f1f5f9 !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .form-input,
+      .form-select,
+      .form-textarea {
+        border: none !important;
+        border-bottom: 1px dashed #334155 !important;
+        border-radius: 0 !important;
+        padding: 2px 3px !important;
+        background: transparent !important;
+        font-size: 10.5px !important;
+        color: #000 !important;
+        appearance: none !important;
+        -webkit-appearance: none !important;
+      }
+
+      tr, .avoid-break {
+        page-break-inside: avoid;
+        break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+  <!-- TOP STICKY CONTROL BAR (Hidden on Print/PDF) -->
+  <header class="no-print sticky top-0 z-40 bg-postRed-800 text-white shadow-lg border-b-4 border-postGold-500">
+    <div class="max-w-7xl mx-auto px-4 py-2.5 flex flex-wrap items-center justify-between gap-3">
+      <!-- Brand / Title -->
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-lg bg-postGold-500 text-postRed-900 flex items-center justify-center font-black text-lg shadow-inner shrink-0">
+          IP
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="font-bold text-sm md:text-base tracking-wide">INDIA POST • DHEMAJI SUB DIVISION</span>
+            <span id="saveStatusBadge" class="text-[11px] bg-postRed-900/90 text-postGold-400 px-2 py-0.5 rounded-full border border-postGold-500/40 font-medium">
+              Auto-save active
+            </span>
+          </div>
+          <p class="text-xs text-red-100">Branch Post Office (BO) Visit Questionnaire • Serverless Web Form</p>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="flex flex-wrap items-center gap-2">
+        <button type="button" onclick="saveDraftToLocal(true)" class="px-2.5 py-1.5 rounded bg-postRed-700 hover:bg-postRed-600 text-xs font-medium border border-red-400/30 transition flex items-center gap-1">
+          <span>💾 Save Draft</span>
+        </button>
+
+        <button type="button" onclick="exportJsonBackup()" class="px-2.5 py-1.5 rounded bg-postRed-700 hover:bg-postRed-600 text-xs font-medium border border-red-400/30 transition flex items-center gap-1" title="Download JSON backup file">
+          <span>📤 Export JSON</span>
+        </button>
+
+        <label class="px-2.5 py-1.5 rounded bg-postRed-700 hover:bg-postRed-600 text-xs font-medium border border-red-400/30 transition flex items-center gap-1 cursor-pointer" title="Restore from JSON backup file">
+          <span>📥 Import JSON</span>
+          <input type="file" id="jsonImportInput" accept=".json" class="hidden" onchange="importJsonBackup(event)" />
+        </label>
+
+        <button type="button" onclick="openResetModal()" class="px-2.5 py-1.5 rounded bg-red-950 hover:bg-red-900 text-red-200 text-xs font-medium border border-red-700 transition">
+          🗑️ Clear Form
+        </button>
+
+        <div class="h-5 w-px bg-red-600 mx-0.5 hidden sm:block"></div>
+
+        <!-- Primary PDF Download Action -->
+        <button type="button" id="btnDirectPdf" onclick="downloadDirectPDF()" class="px-4 py-1.5 rounded bg-postGold-500 hover:bg-postGold-400 text-slate-950 text-xs font-extrabold shadow-md transition flex items-center gap-1.5">
+          <span>📄 Download PDF</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Section Quick-Jump & Progress Bar -->
+    <div class="bg-postRed-900/95 border-t border-red-800/80">
+      <div class="max-w-7xl mx-auto px-4 py-1.5 flex flex-wrap items-center justify-between gap-2">
+        <nav class="flex items-center gap-1 overflow-x-auto py-0.5 text-xs">
+          <button type="button" onclick="scrollToSection('sec-a')" class="px-2.5 py-1 rounded hover:bg-postRed-700 text-red-100 font-medium whitespace-nowrap transition">A. Administration</button>
+          <button type="button" onclick="scrollToSection('sec-b')" class="px-2.5 py-1 rounded hover:bg-postRed-700 text-red-100 font-medium whitespace-nowrap transition">B. Mail Operations</button>
+          <button type="button" onclick="scrollToSection('sec-c')" class="px-2.5 py-1 rounded hover:bg-postRed-700 text-red-100 font-medium whitespace-nowrap transition">C. Finance & POSB</button>
+          <button type="button" onclick="scrollToSection('sec-d')" class="px-2.5 py-1 rounded hover:bg-postRed-700 text-red-100 font-medium whitespace-nowrap transition">D. IPPB</button>
+          <button type="button" onclick="scrollToSection('sec-e')" class="px-2.5 py-1 rounded hover:bg-postRed-700 text-red-100 font-medium whitespace-nowrap transition">E. PLI / RPLI</button>
+          <button type="button" onclick="scrollToSection('sec-f')" class="px-2.5 py-1 rounded hover:bg-postRed-700 text-red-100 font-medium whitespace-nowrap transition">F. Conclusion & Sign</button>
+        </nav>
+
+        <div class="flex items-center gap-2 ml-auto">
+          <span class="text-[11px] text-red-200 font-medium">Completion: <strong id="progressPercent" class="text-postGold-400">0%</strong></span>
+          <div class="w-24 sm:w-32 h-2 bg-red-950 rounded-full overflow-hidden border border-red-700">
+            <div id="progressBar" class="h-full bg-postGold-400 transition-all duration-300" style="width: 0%"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Toast Notification -->
+  <div id="toastBox" class="no-print fixed bottom-5 right-5 z-50 hidden bg-slate-900 text-white px-4 py-3 rounded-lg shadow-xl border-l-4 border-postGold-500 text-xs font-medium max-w-sm">
+    <span id="toastMessage">Saved</span>
+  </div>
+
+  <!-- Confirmation Modal for Clearing Form -->
+  <div id="resetModal" class="no-print fixed inset-0 z-50 hidden bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="bg-white rounded-xl max-w-md w-full p-6 shadow-2xl border border-slate-200">
+      <h3 class="text-lg font-bold text-slate-900">Clear All Questionnaire Data?</h3>
+      <p class="text-sm text-slate-600 mt-2">This will erase all current entries and clear the saved draft in your browser. Make sure you have downloaded the PDF or JSON backup if needed.</p>
+      <div class="mt-5 flex justify-end gap-2">
+        <button type="button" onclick="closeResetModal()" class="px-4 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold">Cancel</button>
+        <button type="button" onclick="confirmResetForm()" class="px-4 py-2 rounded-lg bg-postRed-700 hover:bg-postRed-800 text-white text-xs font-semibold">Yes, Clear Form</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN QUESTIONNAIRE DOCUMENT CONTAINER -->
+  <main class="flex-1 py-6 px-2 sm:px-4">
+    <form id="boVisitForm" onsubmit="return false;" class="max-w-5xl mx-auto bg-white shadow-xl rounded-xl border border-slate-200 p-4 sm:p-8" id="printableArea">
+      <div id="printableDocument">
+
+        <!-- OFFICIAL DOCUMENT HEADER -->
+        <div class="border-b-2 border-slate-800 pb-4 mb-6 text-center">
+          <div class="inline-flex items-center gap-2 px-3 py-0.5 rounded-full bg-red-50 border border-red-200 text-postRed-800 text-[11px] font-bold tracking-wider uppercase mb-2 no-print">
+            Official Inspection & Visit Record
+          </div>
+          <h1 class="font-serif text-base sm:text-xl font-black tracking-wide text-slate-900 uppercase">
+            DEPARTMENT OF POSTS, GOVERNMENT OF INDIA
+          </h1>
+          <h2 class="font-serif text-xs sm:text-base font-bold text-slate-800 uppercase mt-0.5">
+            OFFICE OF THE INSPECTOR POSTS, DHEMAJI SUB DIVISION, DHEMAJI – 787057
+          </h2>
+          <div class="mt-2 inline-block bg-slate-900 text-white px-4 py-1 rounded text-xs sm:text-sm font-bold tracking-widest uppercase">
+            BRANCH POST OFFICE VISIT QUESTIONNAIRE
+          </div>
+        </div>
+
+        <!-- ================================================================= -->
+        <!-- SECTION A: ADMINISTRATION                                         -->
+        <!-- ================================================================= -->
+        <section id="sec-a" class="section-card mb-8 border border-slate-300 rounded-lg overflow-hidden bg-white">
+          <div class="section-header-bar bg-postRed-800 text-white px-4 py-2.5 font-bold text-sm tracking-wide uppercase flex items-center justify-between">
+            <span>A. ADMINISTRATION</span>
+            <span class="text-xs font-normal text-postGold-400 no-print">Items 1 – 5</span>
+          </div>
+
+          <div class="p-4 sm:p-5 space-y-6">
+            <!-- Item 1 -->
+            <div>
+              <h3 class="font-bold text-sm text-slate-900 mb-2">1. General Information about the Branch Post Office</h3>
+              <div class="overflow-x-auto">
+                <table class="official-table">
+                  <thead>
+                    <tr>
+                      <th class="w-16 text-center">Sl. No.</th>
+                      <th class="w-5/12">Information</th>
+                      <th>Details</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="text-center font-semibold">1</td>
+                      <td class="font-medium">Name of the Branch Office (BO)</td>
+                      <td><input type="text" name="a1_bo_name" id="a1_bo_name" class="form-input" /></td>
+                    </tr>
+                    <tr>
+                      <td class="text-center font-semibold">2</td>
+                      <td class="font-medium">Name of the Account Office (AO)</td>
+                      <td><input type="text" name="a1_ao_name" class="form-input" /></td>
+                    </tr>
+                    <tr>
+                      <td class="text-center font-semibold">3</td>
+                      <td class="font-medium">Name of the Head Office</td>
+                      <td><input type="text" name="a1_ho_name" class="form-input" /></td>
+                    </tr>
+                    <tr>
+                      <td class="text-center font-semibold">4</td>
+                      <td class="font-medium">Facility ID of the BO / Profit-Cost Centre ID of the BO</td>
+                      <td><input type="text" name="a1_facility_id" class="form-input" /></td>
+                    </tr>
+                    <tr>
+                      <td class="text-center font-semibold">5</td>
+                      <td class="font-medium">Establishment of the BO (BPM / ABPMs)</td>
+                      <td><input type="text" name="a1_establishment" class="form-input" /></td>
+                    </tr>
+                    <tr>
+                      <td class="text-center font-semibold">6</td>
+                      <td class="font-medium">Date of Last Inspection (DLI) and by whom</td>
+                      <td><input type="text" name="a1_dli_details" class="form-input" /></td>
+                    </tr>
+                    <tr>
+                      <td class="text-center font-semibold">7</td>
+                      <td class="font-medium">
+                        Date of subsequent visits by Mail Overseer since DLI
+                        <span class="block text-xs text-slate-500 font-normal">(Ref: No. 16-02/2023-Inspn dated 23-01-2024)</span>
+                      </td>
+                      <td><input type="text" name="a1_subsequent_visits" class="form-input" /></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Item 2 -->
+            <div class="avoid-break">
+              <label class="block font-bold text-sm text-slate-900 mb-1">
+                2. Is there any para of previous Inspection Report pending for compliance? If so, get the same completed by the BPM in your presence and record it in the Visit Report.
+              </label>
+              <div class="mt-1">
+                <span class="text-xs font-semibold text-slate-600 uppercase">Remarks of Mail Overseer:</span>
+                <textarea name="a2_ir_compliance_remarks" rows="2" class="form-textarea mt-1"></textarea>
+              </div>
+            </div>
+
+            <!-- Item 3 -->
+            <div class="avoid-break">
+              <label class="block font-bold text-sm text-slate-900 mb-1">
+                3. Whether all work is carried out by Android mobile device (DARPAN 2.0 / DREAM App) on a daily basis since last visit? If not, reasons thereof.
+              </label>
+              <div class="mt-1">
+                <span class="text-xs font-semibold text-slate-600 uppercase">Remarks of Mail Overseer:</span>
+                <textarea name="a3_darpan_daily_remarks" rows="2" class="form-textarea mt-1"></textarea>
+              </div>
+            </div>
+
+            <!-- Item 3A -->
+            <div class="avoid-break">
+              <h3 class="font-bold text-sm text-slate-900">3A. Elimination of Zero / NIL Transaction Status of Branch Offices:</h3>
+              <p class="text-xs text-slate-600 mb-2">
+                Verify whether the Branch Office has completed/eliminated NIL transaction status across all core business verticals (POSB, PLI/RPLI, Mail Booking, and IPPB) and is generating regular daily transactions without remaining a zero-transaction BO.
+              </p>
+              <div class="overflow-x-auto">
+                <table class="official-table">
+                  <thead>
+                    <tr>
+                      <th class="w-1/4 text-center">POSB NIL Status</th>
+                      <th class="w-1/4 text-center">PLI / RPLI NIL Status</th>
+                      <th class="w-1/4 text-center">Mail Booking NIL Status</th>
+                      <th class="w-1/4 text-center">IPPB NIL Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <select name="a3a_posb_nil" class="form-select">
+                          <option value="">-- Select --</option>
+                          <option value="Completed">Completed</option>
+                          <option value="Pending">Pending</option>
+                        </select>
+                      </td>
+                      <td>
+                        <select name="a3a_pli_nil" class="form-select">
+                          <option value="">-- Select --</option>
+                          <option value="Completed">Completed</option>
+                          <option value="Pending">Pending</option>
+                        </select>
+                      </td>
+                      <td>
+                        <select name="a3a_mail_nil" class="form-select">
+                          <option value="">-- Select --</option>
+                          <option value="Completed">Completed</option>
+                          <option value="Pending">Pending</option>
+                        </select>
+                      </td>
+                      <td>
+                        <select name="a3a_ippb_nil" class="form-select">
+                          <option value="">-- Select --</option>
+                          <option value="Completed">Completed</option>
+                          <option value="Pending">Pending</option>
+                        </select>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="mt-2">
+                <span class="text-xs font-semibold text-slate-600 uppercase">Remarks of Mail Overseer:</span>
+                <textarea name="a3a_nil_remarks" rows="2" class="form-textarea mt-1"></textarea>
+              </div>
+            </div>
+
+            <!-- Item 4 -->
+            <div>
+              <h3 class="font-bold text-sm text-slate-900 mb-2">
+                4. Whether BO signage board, IPPB Signage, Notice Board, Banners, Standees, CNB, List of Service Charges, and Mandatory Bilingual Customer Notices are properly mounted at an appropriate place:
+              </h3>
+              <div class="overflow-x-auto">
+                <table class="official-table">
+                  <thead>
+                    <tr>
+                      <th class="w-5/12">Display Item</th>
+                      <th class="w-3/12">Availability Status</th>
+                      <th class="w-4/12">Condition / Remarks</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="font-medium">BO Signage Board</td>
+                      <td>
+                        <select name="a4_signage_avail" class="form-select">
+                          <option value="">-- Select --</option>
+                          <option value="Available">Available</option>
+                          <option value="Not Available">Not Available</option>
+                        </select>
+                      </td>
+                      <td>
+                        <select name="a4_signage_cond" class="form-select">
+                          <option value="">-- Select --</option>
+                          <option value="Good">Good</option>
+                          <option value="Repairing Needed">Repairing Needed</option>
+                          <option value="Supply New">Supply New</option>
+                        </select>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="font-medium">IPPB Signage &amp; IPPB QR Code</td>
+                      <td>
+                        <select name="a4_ippb_avail" class="form-select">
+                          <option value="">-- Select --</option>
+                          <option value="Available">Available</option>
+                          <option value="Not Available">Not Available</option>
+                        </select>
+                      </td>
+                      <td>
+                        <select name="a4_ippb_cond" class="form-select">
+                          <option value="">-- Select --</option>
+                          <option value="Good">Good</option>
+                          <option value="Repairing Needed">Repairing Needed</option>
+                          <option value="Supply New">Supply New</option>
+                        </select>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="font-medium">Notice Board</td>
+                      <td>
+                        <select name="a4_notice_avail" class="form-select">
+                          <option value="">-- Select --</option>
+                          <option value="Available">Available</option>
+                          <option value="Not Available">Not Available</option>
+                        </select>
+                      </td>
+                      <td>
+                        <select name="a4_notice_cond" class="form-select">
+                          <option value="">-- Select --</option>
+                          <option value="Good">Good</option>
+                          <option value="Repairing Needed">Repairing Needed</option>
+                          <option value="Supply New">Supply New</option>
+                        </select>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="font-medium">Banners &amp; Standees</td>
+                      <td>
+                        <select name="a4_banners_avail" class="form-select">
+                          <option value="">-- Select --</option>
+                          <option value="Available">Available</option>
+                          <option value="Not Available">Not Available</option>
+                        </select>
+                      </td>
+                      <td>
+                        <select name="a4_banners_cond" class="form-select">
+                          <option value="">-- Select --</option>
+                          <option value="Good">Good</option>
+                          <option value="Repairing Needed">Repairing Needed</option>
+                          <option value="Supply New">Supply New</option>
+                        </select>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="font-medium">CNB &amp; List of Service Charges</td>
+                      <td>
+                        <select name="a4_cnb_avail" class="form-select">
+                          <option value="">-- Select --</option>
+                          <option value="Available">Available</option>
+                          <option value="Not Available">Not Available</option>
+                        </select>
+                      </td>
+                      <td>
+                        <input type="text" name="a4_cnb_remarks" class="form-input" />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="font-medium">Bilingual Customer Notice (English &amp; Assamese) on Passbook Printing, SB-28 Receipt &amp; Mobile Linking</td>
+                      <td>
+                        <select name="a4_bilingual_sb28_status" class="form-select">
+                          <option value="">-- Select --</option>
+                          <option value="Displayed">Displayed</option>
+                          <option value="Not Displayed">Not Displayed</option>
+                        </select>
+                      </td>
+                      <td>
+                        <input type="text" name="a4_bilingual_sb28_remarks" class="form-input" />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="font-medium">Bilingual Notice on Biometric e-KYC &amp; Inter-Operability (SB Order No. 06/2026)</td>
+                      <td>
+                        <select name="a4_bilingual_ekyc_status" class="form-select">
+                          <option value="">-- Select --</option>
+                          <option value="Displayed">Displayed</option>
+                          <option value="Not Displayed">Not Displayed</option>
+                        </select>
+                      </td>
+                      <td>
+                        <input type="text" name="a4_bilingual_ekyc_remarks" class="form-input" />
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Item 5 -->
+            <div class="avoid-break">
+              <label class="block font-bold text-sm text-slate-900 mb-1">
+                5. Observe the Look and Feel of the BO and ensure Swachhta norms are followed. Also verify whether weeding out of old records as per norms is carried out.
+              </label>
+              <div class="mt-1">
+                <span class="text-xs font-semibold text-slate-600 uppercase">Remarks of Mail Overseer:</span>
+                <textarea name="a5_swachhta_remarks" rows="2" class="form-textarea mt-1"></textarea>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ================================================================= -->
+        <!-- SECTION B: MAIL OPERATIONS                                        -->
+        <!-- ================================================================= -->
+        <section id="sec-b" class="section-card mb-8 border border-slate-300 rounded-lg overflow-hidden bg-white">
+          <div class="section-header-bar bg-postRed-800 text-white px-4 py-2.5 font-bold text-sm tracking-wide uppercase flex items-center justify-between">
+            <span>B. MAIL OPERATIONS</span>
+            <span class="text-xs font-normal text-postGold-400 no-print">Items 6, 6A &amp; 7</span>
+          </div>
+
+          <div class="p-4 sm:p-5 space-y-6">
+            <!-- Item 6 -->
+            <div>
+              <h3 class="font-bold text-sm text-slate-900 mb-2">6. Check the articles in deposit to see:</h3>
+              <div class="overflow-x-auto">
+                <table class="official-table">
+                  <thead>
+                    <tr>
+                      <th class="w-14 text-center">Sl. No.</th>
+                      <th class="w-5/12">Question</th>
+                      <th>Remarks of Mail Overseer</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="text-center font-semibold">i</td>
+                      <td class="font-medium">No. of articles in deposit</td>
+                      <td>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                          <div>
+                            <label class="text-[11px] font-bold text-slate-600">SP:</label>
+                            <input type="text" name="b6_i_sp" class="form-input" />
+                          </div>
+                          <div>
+                            <label class="text-[11px] font-bold text-slate-600">RL:</label>
+                            <input type="text" name="b6_i_rl" class="form-input" />
+                          </div>
+                          <div>
+                            <label class="text-[11px] font-bold text-slate-600">Parcel:</label>
+                            <input type="text" name="b6_i_parcel" class="form-input" />
+                          </div>
+                          <div>
+                            <label class="text-[11px] font-bold text-slate-600">Ordinary:</label>
+                            <input type="text" name="b6_i_ordinary" class="form-input" />
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="text-center font-semibold">ii</td>
+                      <td class="font-medium">Whether any articles are held beyond prescribed period</td>
+                      <td><input type="text" name="b6_ii_beyond_period" class="form-input" /></td>
+                    </tr>
+                    <tr>
+                      <td class="text-center font-semibold">iii</td>
+                      <td class="font-medium">Whether articles in deposit are in good condition</td>
+                      <td><input type="text" name="b6_iii_condition" class="form-input" /></td>
+                    </tr>
+                    <tr>
+                      <td class="text-center font-semibold">iv</td>
+                      <td class="font-medium">Compare the number of articles in deposit as per DARPAN CSI app and the physical number of articles available at the BO. If not matching, examine cause and guide BPM suitably.</td>
+                      <td><textarea name="b6_iv_darpan_compare" rows="2" class="form-textarea"></textarea></td>
+                    </tr>
+                    <tr>
+                      <td class="text-center font-semibold">v</td>
+                      <td class="font-medium">Check randomly a few articles delivered at the BO (including eMO) using Postinfo mobile app or device backup to confirm delivery status is updated (Note 4 Article Nos. with date of delivery).</td>
+                      <td>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                          <div class="flex items-center gap-1.5">
+                            <span class="text-xs font-bold text-slate-700">1.</span>
+                            <input type="text" name="b6_v_art1" class="form-input" />
+                          </div>
+                          <div class="flex items-center gap-1.5">
+                            <span class="text-xs font-bold text-slate-700">2.</span>
+                            <input type="text" name="b6_v_art2" class="form-input" />
+                          </div>
+                          <div class="flex items-center gap-1.5">
+                            <span class="text-xs font-bold text-slate-700">3.</span>
+                            <input type="text" name="b6_v_art3" class="form-input" />
+                          </div>
+                          <div class="flex items-center gap-1.5">
+                            <span class="text-xs font-bold text-slate-700">4.</span>
+                            <input type="text" name="b6_v_art4" class="form-input" />
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Item 6A -->
+            <div class="avoid-break">
+              <h3 class="font-bold text-sm text-slate-900 mb-2">6A. Details of Mail Booking Procured by BPM Since Date of Last Inspection (DLI):</h3>
+              <div class="overflow-x-auto">
+                <table class="official-table">
+                  <thead>
+                    <tr>
+                      <th class="w-16 text-center">Sl. No.</th>
+                      <th class="w-5/12">Mail Category</th>
+                      <th>No. of Articles Booked Since DLI</th>
+                      <th>Total Revenue / Postage Realized (in ₹)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="text-center font-semibold">1</td>
+                      <td class="font-medium">Speed Post (Inland &amp; International)</td>
+                      <td><input type="number" step="any" min="0" name="b6a_sp_count" class="form-input calc-6a" oninput="calculateAllTotals()" /></td>
+                      <td><input type="number" step="any" min="0" name="b6a_sp_rev" class="form-input calc-6a" oninput="calculateAllTotals()" /></td>
+                    </tr>
+                    <tr>
+                      <td class="text-center font-semibold">2</td>
+                      <td class="font-medium">Registered Letter / Registered Parcel</td>
+                      <td><input type="number" step="any" min="0" name="b6a_rl_count" class="form-input calc-6a" oninput="calculateAllTotals()" /></td>
+                      <td><input type="number" step="any" min="0" name="b6a_rl_rev" class="form-input calc-6a" oninput="calculateAllTotals()" /></td>
+                    </tr>
+                    <tr>
+                      <td class="text-center font-semibold">3</td>
+                      <td class="font-medium">Business Parcel / Express Parcel / COD</td>
+                      <td><input type="number" step="any" min="0" name="b6a_bp_count" class="form-input calc-6a" oninput="calculateAllTotals()" /></td>
+                      <td><input type="number" step="any" min="0" name="b6a_bp_rev" class="form-input calc-6a" oninput="calculateAllTotals()" /></td>
+                    </tr>
+                    <tr>
+                      <td class="text-center font-semibold">4</td>
+                      <td class="font-medium">e-Money Order (eMO) / Others</td>
+                      <td><input type="number" step="any" min="0" name="b6a_emo_count" class="form-input calc-6a" oninput="calculateAllTotals()" /></td>
+                      <td><input type="number" step="any" min="0" name="b6a_emo_rev" class="form-input calc-6a" oninput="calculateAllTotals()" /></td>
+                    </tr>
+                    <tr class="bg-slate-50 font-bold">
+                      <td class="text-center">Total</td>
+                      <td>Total Mail Booking Performance Since DLI</td>
+                      <td><input type="text" name="b6a_total_count" id="b6a_total_count" readonly class="form-input" value="" /></td>
+                      <td><input type="text" name="b6a_total_rev" id="b6a_total_rev" readonly class="form-input" value="" /></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="mt-2">
+                <span class="text-xs font-semibold text-slate-600 uppercase">Remarks of Mail Overseer:</span>
+                <input type="text" name="b6a_remarks" class="form-input mt-1" />
+              </div>
+            </div>
+
+            <!-- Item 7 -->
+            <div class="avoid-break">
+              <h3 class="font-bold text-sm text-slate-900 mb-2">7. Letter Boxes:</h3>
+              <div class="overflow-x-auto">
+                <table class="official-table">
+                  <thead>
+                    <tr>
+                      <th class="w-16 text-center">Sl. No.</th>
+                      <th class="w-5/12">Question</th>
+                      <th>Remarks of Mail Overseer</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="text-center font-semibold">i</td>
+                      <td class="font-medium">Apart from the office letter box, how many letter boxes are attached to the BO?</td>
+                      <td><input type="text" name="b7_i_lb_count" class="form-input" /></td>
+                    </tr>
+                    <tr>
+                      <td class="text-center font-semibold">ii</td>
+                      <td class="font-medium">Whether LBs are painted and in good condition?</td>
+                      <td><input type="text" name="b7_ii_lb_condition" class="form-input" /></td>
+                    </tr>
+                    <tr>
+                      <td class="text-center font-semibold">iii</td>
+                      <td class="font-medium">Are LBs cleared punctually? Are timings of clearance suitable?</td>
+                      <td><input type="text" name="b7_iii_lb_clearance" class="form-input" /></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ================================================================= -->
+        <!-- SECTION C: FINANCE AND ACCOUNTING                                 -->
+        <!-- ================================================================= -->
+        <section id="sec-c" class="section-card mb-8 border border-slate-300 rounded-lg overflow-hidden bg-white">
+          <div class="section-header-bar bg-postRed-800 text-white px-4 py-2.5 font-bold text-sm tracking-wide uppercase flex items-center justify-between">
+            <span>C. FINANCE AND ACCOUNTING</span>
+            <span class="text-xs font-normal text-postGold-400 no-print">Items 8 – 16</span>
+          </div>
+
+          <div class="p-4 sm:p-5 space-y-6">
+            <!-- Item 8 -->
+            <div>
+              <h3 class="font-bold text-sm text-slate-900 mb-2">8. BO Balance Verification:</h3>
+              <div class="overflow-x-auto">
+                <table class="official-table">
+                  <thead>
+                    <tr>
+                      <th class="w-14 text-center">Sl. No.</th>
+                      <th class="w-5/12">Question</th>
+                      <th>Remarks of Mail Overseer</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="text-center font-semibold">i</td>
+                      <td class="font-medium">Last acknowledged BO balance by Account Office through BO slip or DTR.</td>
+                      <td>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                          <div>
+                            <label class="text-[11px] font-bold text-slate-600">Date:</label>
+                            <input type="text" name="c8_i_date" class="form-input" />
+                          </div>
+                          <div>
+                            <label class="text-[11px] font-bold text-slate-600">Balance as per BO Slip (₹):</label>
+                            <input type="text" name="c8_i_boslip_bal" class="form-input" />
+                          </div>
+                          <div>
+                            <label class="text-[11px] font-bold text-slate-600">Balance as per Physical Cash (₹):</label>
+                            <input type="text" name="c8_i_phy_bal" class="form-input" />
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="text-center font-semibold">ii</td>
+                      <td class="font-medium">Details of cash, stamps, forms in stock. Verify the same and record reason for variation, if any.</td>
+                      <td><textarea name="c8_ii_stock_details" rows="2" class="form-textarea"></textarea></td>
+                    </tr>
+                    <tr>
+                      <td class="text-center font-semibold">iii</td>
+                      <td class="font-medium">Whether cash balance is correct? Verify subsequent transactions of the BO to check. If any variation, record reasons.</td>
+                      <td>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                          <select name="c8_iii_cash_status" class="form-select">
+                            <option value="">-- Select --</option>
+                            <option value="Cash balance tallied">Cash balance tallied</option>
+                            <option value="Cash balance not tallied">Cash balance not tallied</option>
+                          </select>
+                          <input type="text" name="c8_iii_cash_remarks" class="form-input" />
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="text-center font-semibold">iv</td>
+                      <td class="font-medium">Verify wallet balance with physical cash balance. Record reason for variation, if any.</td>
+                      <td>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                          <select name="c8_iv_wallet_status" class="form-select">
+                            <option value="">-- Select --</option>
+                            <option value="Wallet balance tallied">Wallet balance tallied</option>
+                            <option value="Wallet balance not tallied">Wallet balance not tallied</option>
+                          </select>
+                          <input type="text" name="c8_iv_wallet_remarks" class="form-input" />
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="text-center font-semibold">v</td>
+                      <td class="font-medium">Whether stamps received through CSI and duly acknowledged? Check invoices received and whether inventory updated.</td>
+                      <td><input type="text" name="c8_v_csi_stamps" class="form-input" /></td>
+                    </tr>
+                    <tr>
+                      <td class="text-center font-semibold">vi</td>
+                      <td class="font-medium">Examine the Postage Due and amount realized towards unpaid articles and record results.</td>
+                      <td><input type="text" name="c8_vi_postage_due" class="form-input" /></td>
+                    </tr>
+                    <tr>
+                      <td class="text-center font-semibold">vii</td>
+                      <td class="font-medium">Check BO Account for one day selected at random each month since DLI/DLV and verify whether entries against heads (a) and (b) of BO slips are correctly transferred to BO Account. Verify genuineness of any alterations.</td>
+                      <td>
+                        <label class="text-[11px] font-bold text-slate-600">Dates checked:</label>
+                        <textarea name="c8_vii_dates_checked" rows="2" class="form-textarea mt-0.5"></textarea>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Item 9 -->
+            <div class="avoid-break">
+              <h3 class="font-bold text-sm text-slate-900">9. Authorized Cash Balance, Cash Retention &amp; Liability Register, and Removal of Excess Cash:</h3>
+              <p class="text-xs text-slate-600 mb-2 leading-relaxed">
+                Examine the BO Account since the last visit to verify that the BPM has not retained cash beyond the sanctioned Authorized Cash Balance without genuine customer liability. Check whether the bound, page-numbered Cash Retention &amp; Liability Register (Date, Customer Name, Account/Policy No., Liability Amount, Date of Payment, Remarks) is maintained and tallied with the reverse entries of the BO Daily Account. Verify that NO excess cash is retained beyond the strict 05-day ceiling. If any unjustified excess cash or cash retained beyond 5 days is found, the Mail Overseer MUST immediately remove and remit the excess cash to the Account Office at the time of the visit.
+              </p>
+              <div class="overflow-x-auto">
+                <table class="official-table">
+                  <thead>
+                    <tr>
+                      <th class="w-1/4">Authorized Cash Balance</th>
+                      <th class="w-1/4">Physical Cash Found on Visit</th>
+                      <th class="w-1/4">Valid Liability Documented</th>
+                      <th class="w-1/4">Excess Cash Removed &amp; Remitted Today</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <div class="flex items-center gap-1">
+                          <span class="font-bold text-slate-700">₹</span>
+                          <input type="text" name="c9_auth_cash" class="form-input" />
+                        </div>
+                      </td>
+                      <td>
+                        <div class="flex items-center gap-1">
+                          <span class="font-bold text-slate-700">₹</span>
+                          <input type="text" name="c9_phy_cash" class="form-input" />
+                        </div>
+                      </td>
+                      <td>
+                        <div class="flex items-center gap-1">
+                          <span class="font-bold text-slate-700">₹</span>
+                          <input type="text" name="c9_valid_liability" class="form-input" />
+                        </div>
+                      </td>
+                      <td>
+                        <div class="space-y-1">
+                          <div class="flex items-center gap-1">
+                            <span class="font-bold text-slate-700">₹</span>
+                            <input type="text" name="c9_excess_removed" class="form-input" />
+                          </div>
+                          <div class="flex items-center gap-1">
+                            <span class="text-[11px] font-semibold text-slate-600 whitespace-nowrap">Receipt/Memo No.:</span>
+                            <input type="text" name="c9_receipt_memo_no" class="form-input text-xs" />
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="mt-2">
+                <span class="text-xs font-semibold text-slate-600 uppercase">Remarks of Mail Overseer:</span>
+                <textarea name="c9_remarks" rows="2" class="form-textarea mt-1"></textarea>
+              </div>
+            </div>
+
+            <!-- Item 9A -->
+            <div class="avoid-break">
+              <h3 class="font-bold text-sm text-slate-900">9A. BO Error Book Verification for Network, Balance Mismatch, or IPPB Issues:</h3>
+              <p class="text-xs text-slate-600 mb-1">
+                Verify the BO Error Book to confirm whether any network connectivity failure, DARPAN/CBS balance mismatch, or IPPB balance/settlement issue causing excess cash retention or adjustment delay has been promptly recorded on the very same day.
+              </p>
+              <span class="text-xs font-semibold text-slate-600 uppercase">Remarks of Mail Overseer:</span>
+              <textarea name="c9a_error_book_remarks" rows="2" class="form-textarea mt-1"></textarea>
+            </div>
+
+            <!-- Item 10 -->
+            <div>
+              <h3 class="font-bold text-sm text-slate-900 mb-2">10. Money Order Operations:</h3>
+              <div class="overflow-x-auto">
+                <table class="official-table">
+                  <thead>
+                    <tr>
+                      <th class="w-14 text-center">Sl. No.</th>
+                      <th class="w-5/12">Question</th>
+                      <th>Remarks of Mail Overseer</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="text-center font-semibold">i</td>
+                      <td class="font-medium">No. of MOs issued since last visit.</td>
+                      <td><input type="text" name="c10_i_mo_issued" class="form-input" /></td>
+                    </tr>
+                    <tr>
+                      <td class="text-center font-semibold">ii</td>
+                      <td class="font-medium">No. of MOs received for payment and whether paid promptly. Check promptness with at least 5 payees (Mention MO and payee details).</td>
+                      <td><textarea name="c10_ii_mo_paid_details" rows="2" class="form-textarea"></textarea></td>
+                    </tr>
+                    <tr>
+                      <td class="text-center font-semibold">iii</td>
+                      <td class="font-medium">No. of VP/COD articles delivered (one day in each month since DLI/DLV) and whether VPMO issued immediately.</td>
+                      <td><input type="text" name="c10_iii_vpcod" class="form-input" /></td>
+                    </tr>
+                    <tr>
+                      <td class="text-center font-semibold">iv</td>
+                      <td class="font-medium">Whether demurrage fees charged and noted in VP receipt (RP-55).</td>
+                      <td><input type="text" name="c10_iv_demurrage" class="form-input" /></td>
+                    </tr>
+                    <tr>
+                      <td class="text-center font-semibold">v</td>
+                      <td class="font-medium">Whether List of MO received for payment is pasted in BO journal and those issued to ABPM (MD) is pasted in Postman Book. Check same for other accountable articles.</td>
+                      <td><input type="text" name="c10_v_mo_list_pasted" class="form-input" /></td>
+                    </tr>
+                    <tr>
+                      <td class="text-center font-semibold">vi</td>
+                      <td class="font-medium">Test check whether BPM has given cash to ABPM (MD) for eMO payment beyond prescribed limit (Directorate letter No. 24-3/2012-PO dated 01.10.2018). Educate BPM on procedure if limit exceeded.</td>
+                      <td><input type="text" name="c10_vi_abpm_cash_limit" class="form-input" /></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Item 11 -->
+            <div>
+              <h3 class="font-bold text-sm text-slate-900 mb-2">11. SAVINGS BANK OPERATIONS &amp; PASSBOOK PRINTING DRIVE:</h3>
+              <div class="overflow-x-auto">
+                <table class="official-table">
+                  <thead>
+                    <tr>
+                      <th class="w-14 text-center">Sl. No.</th>
+                      <th class="w-5/12">Question</th>
+                      <th>Remarks of Mail Overseer</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="text-center font-semibold">i</td>
+                      <td class="font-medium">Whether BO journals and Specimen Signature Book of all POSB Schemes maintained and updated with complete KYC. If not, note reasons and intimate SDH.</td>
+                      <td><textarea name="c11_i_ss_book" rows="2" class="form-textarea"></textarea></td>
+                    </tr>
+                    <tr>
+                      <td class="text-center font-semibold">ii</td>
+                      <td class="font-medium">Compare entries made in SB/RD/TD/SSA journals with corresponding entries made in BO Account book. Intimate SDH on variation.</td>
+                      <td><input type="text" name="c11_ii_compare_journals" class="form-input" /></td>
+                    </tr>
+                    <tr>
+                      <td class="text-center font-semibold">iii</td>
+                      <td class="font-medium">Whether cheques received in BO entered in cheque register and submitted to Account Office?</td>
+                      <td><input type="text" name="c11_iii_cheques" class="form-input" /></td>
+                    </tr>
+                    <tr>
+                      <td class="text-center font-semibold">iv</td>
+                      <td class="font-medium">Check that SB-28 Register (register for collection of passbooks as prescribed in Rule 79 of POSB CBS Manual) is maintained, official SB-28 receipts are issued to depositors for every collected passbook, and NO passbook is held at the BO beyond 03 days without dispatch to SO.</td>
+                      <td><textarea name="c11_iv_sb28_register" rows="2" class="form-textarea"></textarea></td>
+                    </tr>
+                    <tr>
+                      <td class="text-center font-semibold">v</td>
+                      <td class="font-medium">No. of passbooks currently in deposit at BO? Contact depositor to ascertain reason and ensure immediate dispatch to SO.</td>
+                      <td><input type="text" name="c11_v_pb_in_deposit" class="form-input" /></td>
+                    </tr>
+                    <tr>
+                      <td class="text-center font-semibold">vi</td>
+                      <td class="font-medium">Record status of Passbooks collected for annual interest posting and sent to AO for updation.</td>
+                      <td>
+                        <div class="space-y-2">
+                          <div class="grid grid-cols-4 gap-2 items-center text-xs font-bold text-slate-700 bg-slate-100 p-1.5 rounded">
+                            <span>Scheme</span>
+                            <span>Total Acc</span>
+                            <span>Int Updated</span>
+                            <span>Int Pending</span>
+                          </div>
+                          <div class="grid grid-cols-4 gap-2 items-center">
+                            <span class="font-bold text-xs">SB:</span>
+                            <input type="text" name="c11_vi_sb_total" class="form-input" />
+                            <input type="text" name="c11_vi_sb_updated" class="form-input" />
+                            <input type="text" name="c11_vi_sb_pending" class="form-input" />
+                          </div>
+                          <div class="grid grid-cols-4 gap-2 items-center">
+                            <span class="font-bold text-xs">SSA:</span>
+                            <input type="text" name="c11_vi_ssa_total" class="form-input" />
+                            <input type="text" name="c11_vi_ssa_updated" class="form-input" />
+                            <input type="text" name="c11_vi_ssa_pending" class="form-input" />
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="text-center font-semibold">vii</td>
+                      <td class="font-medium">Whether any handwritten passbook is available at the BO at the time of Visit. If So collect the passbook by issuing SB 28 and get it printed at the SO and returned back to the customer.</td>
+                      <td>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                          <div>
+                            <label class="text-[11px] font-bold text-slate-600">Collected:</label>
+                            <input type="text" name="c11_vii_collected" class="form-input" />
+                          </div>
+                          <div>
+                            <label class="text-[11px] font-bold text-slate-600">Sent to SO:</label>
+                            <input type="text" name="c11_vii_sent_so" class="form-input" />
+                          </div>
+                          <div>
+                            <label class="text-[11px] font-bold text-slate-600">Returned Printed:</label>
+                            <input type="text" name="c11_vii_returned" class="form-input" />
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Item 11A -->
+            <div class="avoid-break">
+              <h3 class="font-bold text-sm text-slate-900 mb-2">11A. Compliance with SB Order No. 06/2026 (Biometric e-KYC Operations, Mobile Linking &amp; Inter-Operability):</h3>
+              <div class="overflow-x-auto">
+                <table class="official-table">
+                  <thead>
+                    <tr>
+                      <th class="w-14 text-center">Sl. No.</th>
+                      <th class="w-6/12">Verification Check (SB Order No. 06/2026 dated 22.06.2026)</th>
+                      <th>Remarks of Mail Overseer</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="text-center font-semibold">i</td>
+                      <td class="font-medium"><strong>Mandatory Mobile Linking:</strong> Verify that active mobile numbers are linked in all active accounts (no DREAM App transactions allowed without mobile linking w.e.f. 01.09.2026).</td>
+                      <td><textarea name="c11a_i_mobile_linking" rows="2" class="form-textarea"></textarea></td>
+                    </tr>
+                    <tr>
+                      <td class="text-center font-semibold">ii</td>
+                      <td class="font-medium"><strong>Re-KYC Conversion Drive:</strong> Check number of existing CIFs converted to Aadhaar-based biometric e-KYC CIFs via DREAM App ('Re-KYC' menu) and pending updation requests sent to AO.</td>
+                      <td>
+                        <label class="text-[11px] font-bold text-slate-600">Total Re-KYC Conversions Done:</label>
+                        <input type="text" name="c11a_ii_rekyc_count" class="form-input mt-0.5" />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="text-center font-semibold">iii</td>
+                      <td class="font-medium"><strong>e-KYC Transaction &amp; Passbook Rules:</strong> Confirm biometric deposits (up to ₹50,000 in POSA/RD/SSA) and withdrawals (up to ₹20,000 in POSA) are performed only for single accounts (excluding Minor/Joint), and passbooks are date-stamped after every e-KYC transaction.</td>
+                      <td><textarea name="c11a_iii_ekyc_rules" rows="2" class="form-textarea"></textarea></td>
+                    </tr>
+                    <tr>
+                      <td class="text-center font-semibold">iv</td>
+                      <td class="font-medium"><strong>Mandatory Training:</strong> Verify whether BPM/GDS staff have completed the Dak Karmayogi / iGOT course 'Introduction to e-KYC functionalities in the DREAM application for GDS'.</td>
+                      <td>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                          <select name="c11a_iv_training_status" class="form-select">
+                            <option value="">-- Select --</option>
+                            <option value="Completed: Yes">Completed: Yes</option>
+                            <option value="Completed: No">Completed: No</option>
+                          </select>
+                          <input type="text" name="c11a_iv_training_remarks" class="form-input" />
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Item 11B -->
+            <div class="avoid-break">
+              <h3 class="font-bold text-sm text-slate-900">11B. Mandatory Aadhaar Masking Compliance:</h3>
+              <p class="text-xs text-slate-600 mb-1">
+                Inspect existing and newly collected Account Opening Forms (AOFs), KYC forms, and Aadhaar copies on record to ensure that the first eight digits of the Aadhaar number are masked using black ink/pen (XXXX-XXXX-____). Get any unmasked records masked on the spot.
+              </p>
+              <span class="text-xs font-semibold text-slate-600 uppercase">Remarks of Mail Overseer:</span>
+              <textarea name="c11b_aadhaar_masking_remarks" rows="2" class="form-textarea mt-1"></textarea>
+            </div>
+
+            <!-- Item 11C -->
+            <div class="avoid-break">
+              <h3 class="font-bold text-sm text-slate-900 mb-2">11C. Details of POSB Accounts Opened in the Last Quarter by the BPM:</h3>
+              <div class="overflow-x-auto">
+                <table class="official-table">
+                  <thead>
+                    <tr>
+                      <th class="w-16 text-center">Sl. No.</th>
+                      <th class="w-5/12">POSB Scheme</th>
+                      <th>No. of Accounts Opened in Last Quarter</th>
+                      <th>Total Initial Deposit Amount (in ₹)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="text-center font-semibold">1</td>
+                      <td class="font-medium">Post Office Savings Account (POSA)</td>
+                      <td><input type="number" step="any" min="0" name="c11c_posa_cnt" class="form-input" oninput="calculateAllTotals()" /></td>
+                      <td><input type="number" step="any" min="0" name="c11c_posa_amt" class="form-input" oninput="calculateAllTotals()" /></td>
+                    </tr>
+                    <tr>
+                      <td class="text-center font-semibold">2</td>
+                      <td class="font-medium">Recurring Deposit (RD)</td>
+                      <td><input type="number" step="any" min="0" name="c11c_rd_cnt" class="form-input" oninput="calculateAllTotals()" /></td>
+                      <td><input type="number" step="any" min="0" name="c11c_rd_amt" class="form-input" oninput="calculateAllTotals()" /></td>
+                    </tr>
+                    <tr>
+                      <td class="text-center font-semibold">3</td>
+                      <td class="font-medium">Time Deposit (1-Yr / 2-Yr / 3-Yr / 5-Yr TD)</td>
+                      <td><input type="number" step="any" min="0" name="c11c_td_cnt" class="form-input" oninput="calculateAllTotals()" /></td>
+                      <td><input type="number" step="any" min="0" name="c11c_td_amt" class="form-input" oninput="calculateAllTotals()" /></td>
+                    </tr>
+                    <tr>
+                      <td class="text-center font-semibold">4</td>
+                      <td class="font-medium">Sukanya Samriddhi Account (SSA)</td>
+                      <td><input type="number" step="any" min="0" name="c11c_ssa_cnt" class="form-input" oninput="calculateAllTotals()" /></td>
+                      <td><input type="number" step="any" min="0" name="c11c_ssa_amt" class="form-input" oninput="calculateAllTotals()" /></td>
+                    </tr>
+                    <tr>
+                      <td class="text-center font-semibold">5</td>
+                      <td class="font-medium">Monthly Income Scheme (MIS) / SCSS</td>
+                      <td><input type="number" step="any" min="0" name="c11c_mis_cnt" class="form-input" oninput="calculateAllTotals()" /></td>
+                      <td><input type="number" step="any" min="0" name="c11c_mis_amt" class="form-input" oninput="calculateAllTotals()" /></td>
+                    </tr>
+                    <tr>
+                      <td class="text-center font-semibold">6</td>
+                      <td class="font-medium">PPF / NSC / KVP</td>
+                      <td><input type="number" step="any" min="0" name="c11c_ppf_cnt" class="form-input" oninput="calculateAllTotals()" /></td>
+                      <td><input type="number" step="any" min="0" name="c11c_ppf_amt" class="form-input" oninput="calculateAllTotals()" /></td>
+                    </tr>
+                    <tr>
+                      <td class="text-center font-semibold">7</td>
+                      <td class="font-medium">IPPB Accounts Opened</td>
+                      <td><input type="number" step="any" min="0" name="c11c_ippb_cnt" class="form-input" oninput="calculateAllTotals()" /></td>
+                      <td><input type="number" step="any" min="0" name="c11c_ippb_amt" class="form-input" oninput="calculateAllTotals()" /></td>
+                    </tr>
+                    <tr class="bg-slate-50 font-bold">
+                      <td class="text-center">Total</td>
+                      <td>Total Accounts Opened in Last Quarter</td>
+                      <td><input type="text" name="c11c_total_cnt" id="c11c_total_cnt" readonly class="form-input" value="" /></td>
+                      <td><input type="text" name="c11c_total_amt" id="c11c_total_amt" readonly class="form-input" value="" /></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="mt-2">
+                <span class="text-xs font-semibold text-slate-600 uppercase">Remarks of Mail Overseer:</span>
+                <input type="text" name="c11c_remarks" class="form-input mt-1" />
+              </div>
+            </div>
+
+            <!-- Item 12 -->
+            <div class="avoid-break">
+              <h3 class="font-bold text-sm text-slate-900 mb-2">12. Check the following receipt books and record results in the format below:</h3>
+              <div class="overflow-x-auto">
+                <table class="official-table">
+                  <thead>
+                    <tr>
+                      <th>Type of Book</th>
+                      <th>Book No.</th>
+                      <th>From Receipt No.</th>
+                      <th>From Date</th>
+                      <th>From Amount</th>
+                      <th>To Receipt No.</th>
+                      <th>To Date &amp; Amount</th>
+                      <th>Blank Receipts</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="font-bold">SB-26</td>
+                      <td><input type="text" name="c12_sb26_book" class="form-input" /></td>
+                      <td><input type="text" name="c12_sb26_from_no" class="form-input" /></td>
+                      <td><input type="text" name="c12_sb26_from_dt" class="form-input" /></td>
+                      <td><input type="text" name="c12_sb26_from_amt" class="form-input" /></td>
+                      <td><input type="text" name="c12_sb26_to_no" class="form-input" /></td>
+                      <td><input type="text" name="c12_sb26_to_dt_amt" class="form-input" /></td>
+                      <td><input type="text" name="c12_sb26_blank" class="form-input" /></td>
+                    </tr>
+                    <tr>
+                      <td class="font-bold">SB-28</td>
+                      <td><input type="text" name="c12_sb28_book" class="form-input" /></td>
+                      <td><input type="text" name="c12_sb28_from_no" class="form-input" /></td>
+                      <td><input type="text" name="c12_sb28_from_dt" class="form-input" /></td>
+                      <td><input type="text" name="c12_sb28_from_amt" class="form-input" /></td>
+                      <td><input type="text" name="c12_sb28_to_no" class="form-input" /></td>
+                      <td><input type="text" name="c12_sb28_to_dt_amt" class="form-input" /></td>
+                      <td><input type="text" name="c12_sb28_blank" class="form-input" /></td>
+                    </tr>
+                    <tr>
+                      <td class="font-bold">MS-87(a)</td>
+                      <td><input type="text" name="c12_ms87_book" class="form-input" /></td>
+                      <td><input type="text" name="c12_ms87_from_no" class="form-input" /></td>
+                      <td><input type="text" name="c12_ms87_from_dt" class="form-input" /></td>
+                      <td><input type="text" name="c12_ms87_from_amt" class="form-input" /></td>
+                      <td><input type="text" name="c12_ms87_to_no" class="form-input" /></td>
+                      <td><input type="text" name="c12_ms87_to_dt_amt" class="form-input" /></td>
+                      <td><input type="text" name="c12_ms87_blank" class="form-input" /></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <p class="text-xs text-slate-600 mt-2">
+                Also check that acquittance on original SB-26 has been obtained from the account holder and pasted on the backside of the office copy of SB-26, unused SB-26 receipts run in consecutive order, and reference number of new account is entered on original SB-26 receipts.
+              </p>
+              <div class="mt-1">
+                <span class="text-xs font-semibold text-slate-600 uppercase">Remarks of Mail Overseer:</span>
+                <textarea name="c12_receipt_remarks" rows="2" class="form-textarea mt-1"></textarea>
+              </div>
+            </div>
+
+            <!-- Item 13 -->
+            <div>
+              <h3 class="font-bold text-sm text-slate-900 mb-2">
+                13. Collect three passbooks for each POSB scheme (including TD) in which transactions have taken place or new accounts have been opened since the last visit and verify with BO Journal, BO Account, respective POSB Journal, and DREAM/Finacle/AO data:
+              </h3>
+              <div class="overflow-x-auto">
+                <table class="official-table">
+                  <thead>
+                    <tr>
+                      <th class="w-20">Scheme / Sl.</th>
+                      <th>Account No.</th>
+                      <th>Date of Open &amp; Initial Deposit</th>
+                      <th>Date of Last Txn</th>
+                      <th>Deposit / Withdrawal</th>
+                      <th>Balance</th>
+                      <th class="w-20">SMS Alert (Y/N)</th>
+                      <th class="w-24">1st Page &amp; Entries Printed (Y/N)</th>
+                    </tr>
+                  </thead>
+                  <tbody id="pbVerificationBody">
+                    <!-- Populated structurally for SB 1-3, RD 1-3, SSA 1-3, TD 1-3 -->
+                    <tr>
+                      <td class="font-bold">SB - 1</td>
+                      <td><input type="text" name="c13_sb1_acc" class="form-input" /></td>
+                      <td><input type="text" name="c13_sb1_open" class="form-input" /></td>
+                      <td><input type="text" name="c13_sb1_last" class="form-input" /></td>
+                      <td><input type="text" name="c13_sb1_dep" class="form-input" /></td>
+                      <td><input type="text" name="c13_sb1_bal" class="form-input" /></td>
+                      <td><input type="text" name="c13_sb1_sms" class="form-input text-center" /></td>
+                      <td><input type="text" name="c13_sb1_prn" class="form-input text-center" /></td>
+                    </tr>
+                    <tr>
+                      <td class="font-bold">SB - 2</td>
+                      <td><input type="text" name="c13_sb2_acc" class="form-input" /></td>
+                      <td><input type="text" name="c13_sb2_open" class="form-input" /></td>
+                      <td><input type="text" name="c13_sb2_last" class="form-input" /></td>
+                      <td><input type="text" name="c13_sb2_dep" class="form-input" /></td>
+                      <td><input type="text" name="c13_sb2_bal" class="form-input" /></td>
+                      <td><input type="text" name="c13_sb2_sms" class="form-input text-center" /></td>
+                      <td><input type="text" name="c13_sb2_prn" class="form-input text-center" /></td>
+                    </tr>
+                    <tr>
+                      <td class="font-bold">SB - 3</td>
+                      <td><input type="text" name="c13_sb3_acc" class="form-input" /></td>
+                      <td><input type="text" name="c13_sb3_open" class="form-input" /></td>
+                      <td><input type="text" name="c13_sb3_last" class="form-input" /></td>
+                      <td><input type="text" name="c13_sb3_dep" class="form-input" /></td>
+                      <td><input type="text" name="c13_sb3_bal" class="form-input" /></td>
+                      <td><input type="text" name="c13_sb3_sms" class="form-input text-center" /></td>
+                      <td><input type="text" name="c13_sb3_prn" class="form-input text-center" /></td>
+                    </tr>
+                    <tr>
+                      <td class="font-bold">RD - 1</td>
+                      <td><input type="text" name="c13_rd1_acc" class="form-input" /></td>
+                      <td><input type="text" name="c13_rd1_open" class="form-input" /></td>
+                      <td><input type="text" name="c13_rd1_last" class="form-input" /></td>
+                      <td><input type="text" name="c13_rd1_dep" class="form-input" /></td>
+                      <td><input type="text" name="c13_rd1_bal" class="form-input" /></td>
+                      <td><input type="text" name="c13_rd1_sms" class="form-input text-center" /></td>
+                      <td><input type="text" name="c13_rd1_prn" class="form-input text-center" /></td>
+                    </tr>
+                    <tr>
+                      <td class="font-bold">RD - 2</td>
+                      <td><input type="text" name="c13_rd2_acc" class="form-input" /></td>
+                      <td><input type="text" name="c13_rd2_open" class="form-input" /></td>
+                      <td><input type="text" name="c13_rd2_last" class="form-input" /></td>
+                      <td><input type="text" name="c13_rd2_dep" class="form-input" /></td>
+                      <td><input type="text" name="c13_rd2_bal" class="form-input" /></td>
+                      <td><input type="text" name="c13_rd2_sms" class="form-input text-center" /></td>
+                      <td><input type="text" name="c13_rd2_prn" class="form-input text-center" /></td>
+                    </tr>
+                    <tr>
+                      <td class="font-bold">RD - 3</td>
+                      <td><input type="text" name="c13_rd3_acc" class="form-input" /></td>
+                      <td><input type="text" name="c13_rd3_open" class="form-input" /></td>
+                      <td><input type="text" name="c13_rd3_last" class="form-input" /></td>
+                      <td><input type="text" name="c13_rd3_dep" class="form-input" /></td>
+                      <td><input type="text" name="c13_rd3_bal" class="form-input" /></td>
+                      <td><input type="text" name="c13_rd3_sms" class="form-input text-center" /></td>
+                      <td><input type="text" name="c13_rd3_prn" class="form-input text-center" /></td>
+                    </tr>
+                    <tr>
+                      <td class="font-bold">SSA - 1</td>
+                      <td><input type="text" name="c13_ssa1_acc" class="form-input" /></td>
+                      <td><input type="text" name="c13_ssa1_open" class="form-input" /></td>
+                      <td><input type="text" name="c13_ssa1_last" class="form-input" /></td>
+                      <td><input type="text" name="c13_ssa1_dep" class="form-input" /></td>
+                      <td><input type="text" name="c13_ssa1_bal" class="form-input" /></td>
+                      <td><input type="text" name="c13_ssa1_sms" class="form-input text-center" /></td>
+                      <td><input type="text" name="c13_ssa1_prn" class="form-input text-center" /></td>
+                    </tr>
+                    <tr>
+                      <td class="font-bold">SSA - 2</td>
+                      <td><input type="text" name="c13_ssa2_acc" class="form-input" /></td>
+                      <td><input type="text" name="c13_ssa2_open" class="form-input" /></td>
+                      <td><input type="text" name="c13_ssa2_last" class="form-input" /></td>
+                      <td><input type="text" name="c13_ssa2_dep" class="form-input" /></td>
+                      <td><input type="text" name="c13_ssa2_bal" class="form-input" /></td>
+                      <td><input type="text" name="c13_ssa2_sms" class="form-input text-center" /></td>
+                      <td><input type="text" name="c13_ssa2_prn" class="form-input text-center" /></td>
+                    </tr>
+                    <tr>
+                      <td class="font-bold">SSA - 3</td>
+                      <td><input type="text" name="c13_ssa3_acc" class="form-input" /></td>
+                      <td><input type="text" name="c13_ssa3_open" class="form-input" /></td>
+                      <td><input type="text" name="c13_ssa3_last" class="form-input" /></td>
+                      <td><input type="text" name="c13_ssa3_dep" class="form-input" /></td>
+                      <td><input type="text" name="c13_ssa3_bal" class="form-input" /></td>
+                      <td><input type="text" name="c13_ssa3_sms" class="form-input text-center" /></td>
+                      <td><input type="text" name="c13_ssa3_prn" class="form-input text-center" /></td>
+                    </tr>
+                    <tr>
+                      <td class="font-bold">TD - 1</td>
+                      <td><input type="text" name="c13_td1_acc" class="form-input" /></td>
+                      <td><input type="text" name="c13_td1_open" class="form-input" /></td>
+                      <td><input type="text" name="c13_td1_last" class="form-input" /></td>
+                      <td><input type="text" name="c13_td1_dep" class="form-input" /></td>
+                      <td><input type="text" name="c13_td1_bal" class="form-input" /></td>
+                      <td><input type="text" name="c13_td1_sms" class="form-input text-center" /></td>
+                      <td><input type="text" name="c13_td1_prn" class="form-input text-center" /></td>
+                    </tr>
+                    <tr>
+                      <td class="font-bold">TD - 2</td>
+                      <td><input type="text" name="c13_td2_acc" class="form-input" /></td>
+                      <td><input type="text" name="c13_td2_open" class="form-input" /></td>
+                      <td><input type="text" name="c13_td2_last" class="form-input" /></td>
+                      <td><input type="text" name="c13_td2_dep" class="form-input" /></td>
+                      <td><input type="text" name="c13_td2_bal" class="form-input" /></td>
+                      <td><input type="text" name="c13_td2_sms" class="form-input text-center" /></td>
+                      <td><input type="text" name="c13_td2_prn" class="form-input text-center" /></td>
+                    </tr>
+                    <tr>
+                      <td class="font-bold">TD - 3</td>
+                      <td><input type="text" name="c13_td3_acc" class="form-input" /></td>
+                      <td><input type="text" name="c13_td3_open" class="form-input" /></td>
+                      <td><input type="text" name="c13_td3_last" class="form-input" /></td>
+                      <td><input type="text" name="c13_td3_dep" class="form-input" /></td>
+                      <td><input type="text" name="c13_td3_bal" class="form-input" /></td>
+                      <td><input type="text" name="c13_td3_sms" class="form-input text-center" /></td>
+                      <td><input type="text" name="c13_td3_prn" class="form-input text-center" /></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="mt-2">
+                <span class="text-xs font-semibold text-slate-600 uppercase">Remarks of Mail Overseer:</span>
+                <textarea name="c13_passbook_remarks" rows="2" class="form-textarea mt-1"></textarea>
+              </div>
+            </div>
+
+            <!-- Item 14 -->
+            <div class="avoid-break">
+              <label class="block font-bold text-sm text-slate-900 mb-1">
+                14. Check two RD accounts which became discontinued since the last visit with the account holders and record results (intimate SDI(P)/ASP on any discrepancy).
+              </label>
+              <span class="text-xs font-semibold text-slate-600 uppercase">Remarks of Mail Overseer:</span>
+              <textarea name="c14_discontinued_rd_remarks" rows="2" class="form-textarea mt-1"></textarea>
+            </div>
+
+            <!-- Item 15 -->
+            <div class="avoid-break">
+              <h3 class="font-bold text-sm text-slate-900 mb-2">
+                15. Check 5 SSA accounts in which no deposit was made since last one year or more with reference to last balance report of FINACLE and verify with the account holder:
+              </h3>
+              <div class="overflow-x-auto">
+                <table class="official-table">
+                  <thead>
+                    <tr>
+                      <th class="w-16 text-center">Sl. No.</th>
+                      <th class="w-3/12">SSA Account No.</th>
+                      <th class="w-4/12">Contact Details</th>
+                      <th>Reason of Non-Deposit</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="text-center font-semibold">1</td>
+                      <td><input type="text" name="c15_ssa1_acc" class="form-input" /></td>
+                      <td><input type="text" name="c15_ssa1_contact" class="form-input" /></td>
+                      <td><input type="text" name="c15_ssa1_reason" class="form-input" /></td>
+                    </tr>
+                    <tr>
+                      <td class="text-center font-semibold">2</td>
+                      <td><input type="text" name="c15_ssa2_acc" class="form-input" /></td>
+                      <td><input type="text" name="c15_ssa2_contact" class="form-input" /></td>
+                      <td><input type="text" name="c15_ssa2_reason" class="form-input" /></td>
+                    </tr>
+                    <tr>
+                      <td class="text-center font-semibold">3</td>
+                      <td><input type="text" name="c15_ssa3_acc" class="form-input" /></td>
+                      <td><input type="text" name="c15_ssa3_contact" class="form-input" /></td>
+                      <td><input type="text" name="c15_ssa3_reason" class="form-input" /></td>
+                    </tr>
+                    <tr>
+                      <td class="text-center font-semibold">4</td>
+                      <td><input type="text" name="c15_ssa4_acc" class="form-input" /></td>
+                      <td><input type="text" name="c15_ssa4_contact" class="form-input" /></td>
+                      <td><input type="text" name="c15_ssa4_reason" class="form-input" /></td>
+                    </tr>
+                    <tr>
+                      <td class="text-center font-semibold">5</td>
+                      <td><input type="text" name="c15_ssa5_acc" class="form-input" /></td>
+                      <td><input type="text" name="c15_ssa5_contact" class="form-input" /></td>
+                      <td><input type="text" name="c15_ssa5_reason" class="form-input" /></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Item 16 -->
+            <div class="avoid-break">
+              <label class="block font-bold text-sm text-slate-900 mb-1">
+                16. Report any other discrepancy / suspicious activity noticed.
+              </label>
+              <span class="text-xs font-semibold text-slate-600 uppercase">Remarks of Mail Overseer:</span>
+              <textarea name="c16_discrepancy_remarks" rows="2" class="form-textarea mt-1"></textarea>
+            </div>
+          </div>
+        </section>
+
+        <!-- ================================================================= -->
+        <!-- SECTION D: INDIA POST PAYMENTS BANK (IPPB)                        -->
+        <!-- ================================================================= -->
+        <section id="sec-d" class="section-card mb-8 border border-slate-300 rounded-lg overflow-hidden bg-white">
+          <div class="section-header-bar bg-postRed-800 text-white px-4 py-2.5 font-bold text-sm tracking-wide uppercase flex items-center justify-between">
+            <span>D. INDIA POST PAYMENTS BANK (IPPB)</span>
+            <span class="text-xs font-normal text-postGold-400 no-print">Queries i – vi</span>
+          </div>
+
+          <div class="p-4 sm:p-5">
+            <div class="overflow-x-auto">
+              <table class="official-table">
+                <thead>
+                  <tr>
+                    <th class="w-16 text-center">Sl. No.</th>
+                    <th class="w-6/12">Query</th>
+                    <th>Remarks of Mail Overseer</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="text-center font-semibold">i</td>
+                    <td class="font-medium">Check whether Authorization Forms are available and appropriately displayed.</td>
+                    <td><input type="text" name="d_i_auth_forms" class="form-input" /></td>
+                  </tr>
+                  <tr>
+                    <td class="text-center font-semibold">ii</td>
+                    <td class="font-medium">Check adequate inventory levels of collaterals (e.g., QR Card, Brochures, etc.) are maintained.</td>
+                    <td><input type="text" name="d_ii_collaterals" class="form-input" /></td>
+                  </tr>
+                  <tr>
+                    <td class="text-center font-semibold">iii</td>
+                    <td class="font-medium">Number of Doorstep service requests pending (mention details).</td>
+                    <td><input type="text" name="d_iii_doorstep_pending" class="form-input" /></td>
+                  </tr>
+                  <tr>
+                    <td class="text-center font-semibold">iv</td>
+                    <td class="font-medium">Check whether any customer applications (Account closure, PAN Update, Deceased claim, POSB Offline linkage/de-linkage) are lying at BO without forwarding to IPPB branch.</td>
+                    <td><input type="text" name="d_iv_pending_apps" class="form-input" /></td>
+                  </tr>
+                  <tr>
+                    <td class="text-center font-semibold">v</td>
+                    <td class="font-medium">Is 'May I Help You' Desk maintained and Complaint Box available?</td>
+                    <td><input type="text" name="d_v_help_desk" class="form-input" /></td>
+                  </tr>
+                  <tr>
+                    <td class="text-center font-semibold">vi</td>
+                    <td class="font-medium">Whether QR issued by IPPB is displayed at counter? If not, direct BPM to do so.</td>
+                    <td><input type="text" name="d_vi_qr_displayed" class="form-input" /></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ================================================================= -->
+        <!-- SECTION E: POSTAL LIFE INSURANCE (PLI / RPLI)                     -->
+        <!-- ================================================================= -->
+        <section id="sec-e" class="section-card mb-8 border border-slate-300 rounded-lg overflow-hidden bg-white">
+          <div class="section-header-bar bg-postRed-800 text-white px-4 py-2.5 font-bold text-sm tracking-wide uppercase flex items-center justify-between">
+            <span>E. POSTAL LIFE INSURANCE (PLI / RPLI)</span>
+            <span class="text-xs font-normal text-postGold-400 no-print">Items 17 &amp; 17A</span>
+          </div>
+
+          <div class="p-4 sm:p-5 space-y-6">
+            <!-- Item 17 -->
+            <div>
+              <h3 class="font-bold text-sm text-slate-900 mb-2">17. Transactions &amp; Business Procurement:</h3>
+              <div class="overflow-x-auto">
+                <table class="official-table">
+                  <thead>
+                    <tr>
+                      <th class="w-16 text-center">Sl. No.</th>
+                      <th class="w-6/12">Query</th>
+                      <th>Remarks of Mail Overseer</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="text-center font-semibold">i</td>
+                      <td class="font-medium">Two days' transactions from PLI/RPLI premium collection report for each month after last visit shall be checked/compared with entries recorded in Day Collection Report / Device Report / BO Account / DTR.</td>
+                      <td><textarea name="e17_i_premium_check" rows="2" class="form-textarea"></textarea></td>
+                    </tr>
+                    <tr>
+                      <td class="text-center font-semibold">ii</td>
+                      <td class="font-medium">Check the number of PLI/RPLI proposals and other Financial / Non-Financial requests indexed in the device for the last 10 days and timely dispatch of related physical documents to its Account Office. Record delay, if any.</td>
+                      <td><textarea name="e17_ii_proposals_dispatch" rows="2" class="form-textarea"></textarea></td>
+                    </tr>
+                    <tr>
+                      <td class="text-center font-semibold">iii</td>
+                      <td class="font-medium">Check whether PLI/RPLI publicity material (brochures, pamphlets, banners) are available in the BO and banners are permanently displayed.</td>
+                      <td><input type="text" name="e17_iii_publicity" class="form-input" /></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Item 17A -->
+            <div class="avoid-break">
+              <h3 class="font-bold text-sm text-slate-900 mb-2">17A. Details of PLI / RPLI Policies Procured by the BPM (Last Quarter &amp; Since DLI):</h3>
+              <div class="overflow-x-auto">
+                <table class="official-table">
+                  <thead>
+                    <tr>
+                      <th class="w-14 text-center">Sl. No.</th>
+                      <th class="w-3/12">Scheme Type</th>
+                      <th>Policies Procured (Last Quarter)</th>
+                      <th>Sum Assured / Premium (Last Quarter)</th>
+                      <th>Policies Procured (Since DLI)</th>
+                      <th>Sum Assured / Premium (Since DLI)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="text-center font-semibold">1</td>
+                      <td class="font-medium">Postal Life Insurance (PLI)</td>
+                      <td><input type="number" step="any" min="0" name="e17a_pli_pol_qtr" class="form-input" oninput="calculateAllTotals()" /></td>
+                      <td><input type="number" step="any" min="0" name="e17a_pli_sa_qtr" class="form-input" oninput="calculateAllTotals()" /></td>
+                      <td><input type="number" step="any" min="0" name="e17a_pli_pol_dli" class="form-input" oninput="calculateAllTotals()" /></td>
+                      <td><input type="number" step="any" min="0" name="e17a_pli_sa_dli" class="form-input" oninput="calculateAllTotals()" /></td>
+                    </tr>
+                    <tr>
+                      <td class="text-center font-semibold">2</td>
+                      <td class="font-medium">Rural Postal Life Insurance (RPLI)</td>
+                      <td><input type="number" step="any" min="0" name="e17a_rpli_pol_qtr" class="form-input" oninput="calculateAllTotals()" /></td>
+                      <td><input type="number" step="any" min="0" name="e17a_rpli_sa_qtr" class="form-input" oninput="calculateAllTotals()" /></td>
+                      <td><input type="number" step="any" min="0" name="e17a_rpli_pol_dli" class="form-input" oninput="calculateAllTotals()" /></td>
+                      <td><input type="number" step="any" min="0" name="e17a_rpli_sa_dli" class="form-input" oninput="calculateAllTotals()" /></td>
+                    </tr>
+                    <tr>
+                      <td class="text-center font-semibold">3</td>
+                      <td class="font-medium">Bal Jeevan Bima (Children Policy)</td>
+                      <td><input type="number" step="any" min="0" name="e17a_bjb_pol_qtr" class="form-input" oninput="calculateAllTotals()" /></td>
+                      <td><input type="number" step="any" min="0" name="e17a_bjb_sa_qtr" class="form-input" oninput="calculateAllTotals()" /></td>
+                      <td><input type="number" step="any" min="0" name="e17a_bjb_pol_dli" class="form-input" oninput="calculateAllTotals()" /></td>
+                      <td><input type="number" step="any" min="0" name="e17a_bjb_sa_dli" class="form-input" oninput="calculateAllTotals()" /></td>
+                    </tr>
+                    <tr class="bg-slate-50 font-bold">
+                      <td class="text-center">Total</td>
+                      <td>Total PLI / RPLI Procurement</td>
+                      <td><input type="text" name="e17a_tot_pol_qtr" id="e17a_tot_pol_qtr" readonly class="form-input" value="" /></td>
+                      <td><input type="text" name="e17a_tot_sa_qtr" id="e17a_tot_sa_qtr" readonly class="form-input" value="" /></td>
+                      <td><input type="text" name="e17a_tot_pol_dli" id="e17a_tot_pol_dli" readonly class="form-input" value="" /></td>
+                      <td><input type="text" name="e17a_tot_sa_dli" id="e17a_tot_sa_dli" readonly class="form-input" value="" /></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="mt-2">
+                <span class="text-xs font-semibold text-slate-600 uppercase">Remarks of Mail Overseer:</span>
+                <input type="text" name="e17a_remarks" class="form-input mt-1" />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ================================================================= -->
+        <!-- SECTION F: CONCLUSION & PUBLIC SENSITIZATION                      -->
+        <!-- ================================================================= -->
+        <section id="sec-f" class="section-card mb-4 border border-slate-300 rounded-lg overflow-hidden bg-white avoid-break">
+          <div class="section-header-bar bg-postRed-800 text-white px-4 py-2.5 font-bold text-sm tracking-wide uppercase flex items-center justify-between">
+            <span>F. CONCLUSION &amp; PUBLIC SENSITIZATION</span>
+            <span class="text-xs font-normal text-postGold-400 no-print">Item 18 &amp; Signatures</span>
+          </div>
+
+          <div class="p-4 sm:p-5 space-y-5">
+            <div>
+              <h3 class="font-bold text-sm text-slate-900 mb-2">18. Public Interaction, Customer Sensitization &amp; Visit Certificate:</h3>
+              <div class="bg-slate-50 border border-slate-200 rounded-lg p-3.5 text-xs sm:text-sm text-slate-800 leading-relaxed space-y-2">
+                <p class="font-medium">
+                  Ensured interaction with the Gaon Burah / Sarpanch and local public under the BO jurisdiction and obtained feedback on the services of the Branch Post Office. Sensitized customers and prospective depositors regarding:
+                </p>
+                <ul class="space-y-1.5 pl-1">
+                  <li class="flex items-start gap-2">
+                    <span><strong>(a)</strong> Insisting on official SB-28 receipts whenever handing over passbooks for machine printing at the Account Office during transactions or the ongoing Sub-Divisional Passbook Printing Drive;</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <span><strong>(b)</strong> Linking their active mobile numbers with POSB accounts to receive instant SMS alerts (mandatory for all DREAM App transactions);</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <span><strong>(c)</strong> Converting existing CIFs to biometric e-KYC CIFs at the BO to enjoy paperless deposits (up to ₹50,000/- in POSA/RD/SSA) and withdrawals (up to ₹20,000/- in POSA) across any Post Office;</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <span><strong>(d)</strong> Taking printed system-generated receipts for transactions, using e-banking/mobile banking/e-passbook facilities, and checking balances via Toll-Free No. 1800-266-6868.</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- SIGNATURE TABLE -->
+            <div class="overflow-x-auto">
+              <table class="official-table">
+                <thead>
+                  <tr>
+                    <th class="w-1/2 text-center">Signature of BPM (with Date Stamp)</th>
+                    <th class="w-1/2 text-center">Signature of Mail Overseer</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="p-4">
+                      <div class="h-16 border-b border-dashed border-slate-300 mb-3 flex items-end justify-center text-[11px] text-slate-400 italic">
+                        (Space for Physical Signature &amp; BO Date Stamp)
+                      </div>
+                      <div class="space-y-2">
+                        <div>
+                          <label class="text-xs font-bold text-slate-700">Name of BPM:</label>
+                          <input type="text" name="f18_bpm_name" class="form-input mt-0.5" />
+                        </div>
+                        <div>
+                          <label class="text-xs font-bold text-slate-700">Date:</label>
+                          <input type="text" name="f18_bpm_date" id="f18_bpm_date" class="form-input mt-0.5" />
+                        </div>
+                      </div>
+                    </td>
+                    <td class="p-4">
+                      <div class="h-16 border-b border-dashed border-slate-300 mb-3 flex items-end justify-center text-[11px] text-slate-400 italic">
+                        (Space for Signature of Mail Overseer)
+                      </div>
+                      <div class="space-y-2">
+                        <div>
+                          <label class="text-xs font-bold text-slate-700">Name:</label>
+                          <input type="text" name="f18_mo_name" class="form-input mt-0.5" />
+                        </div>
+                        <div class="text-xs font-semibold text-slate-700 py-1">
+                          Mail Overseer, Dhemaji Sub Division, Dhemaji – 787057
+                        </div>
+                        <div>
+                          <label class="text-xs font-bold text-slate-700">Date:</label>
+                          <input type="text" name="f18_mo_date" id="f18_mo_date" class="form-input mt-0.5" />
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- Bottom Action Bar (Hidden on PDF Export) -->
+        <div class="no-print mt-6 pt-4 border-t border-slate-200 flex flex-wrap items-center justify-end gap-3">
+          <button type="button" onclick="openResetModal()" class="px-4 py-2.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs sm:text-sm font-semibold transition">
+            🗑️ Clear Form
+          </button>
+          <button type="button" id="btnDirectPdfBottom" onclick="downloadDirectPDF()" class="px-6 py-2.5 rounded-lg bg-postRed-700 hover:bg-postRed-800 text-white text-xs sm:text-sm font-bold shadow-lg transition flex items-center gap-2">
+            <span>📄 Download PDF</span>
+          </button>
+        </div>
+
+      </div>
+    </form>
+  </main>
+
+  <!-- JAVASCRIPT LOGIC: AUTO-SAVE, TOTALS, JSON EXPORT/IMPORT & PDF GENERATION -->
+  <script>
+    const STORAGE_KEY = 'dhemaji_bo_visit_questionnaire_v3_clean';
+
+    // Initialize on load
+    window.addEventListener('DOMContentLoaded', () => {
+      loadDraftFromLocal();
+      calculateAllTotals();
+      updateCompletionProgress();
+
+      // Attach input listeners for auto-save & progress
+      const form = document.getElementById('boVisitForm');
+      form.addEventListener('input', () => {
+        saveDraftToLocal(false);
+        updateCompletionProgress();
+      });
+      form.addEventListener('change', () => {
+        saveDraftToLocal(false);
+        updateCompletionProgress();
+      });
+    });
+
+    function formatTodayDate() {
+      const d = new Date();
+      const dd = String(d.getDate()).padStart(2, '0');
+      const mm = String(d.getMonth() + 1).padStart(2, '0');
+      const yyyy = d.getFullYear();
+      return `${dd}/${mm}/${yyyy}`;
+    }
+
+    function showToast(msg) {
+      const box = document.getElementById('toastBox');
+      const text = document.getElementById('toastMessage');
+      text.textContent = msg;
+      box.classList.remove('hidden');
+      clearTimeout(window._toastTimer);
+      window._toastTimer = setTimeout(() => {
+        box.classList.add('hidden');
+      }, 3000);
+    }
+
+    function scrollToSection(id) {
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
+    // Helper to check if any field in a list has user input
+    function hasAnyInput(names) {
+      return names.some(name => {
+        const el = document.querySelector(`[name="${name}"]`);
+        return el && el.value.trim() !== '';
+      });
+    }
+
+    function numVal(name) {
+      const el = document.querySelector(`[name="${name}"]`);
+      if (!el) return 0;
+      const v = parseFloat(el.value);
+      return isNaN(v) ? 0 : v;
+    }
+
+    function calculateAllTotals() {
+      // Table 6A: Mail Booking
+      const b6aCntFields = ['b6a_sp_count', 'b6a_rl_count', 'b6a_bp_count', 'b6a_emo_count'];
+      const b6aRevFields = ['b6a_sp_rev', 'b6a_rl_rev', 'b6a_bp_rev', 'b6a_emo_rev'];
+
+      const b6aCount = b6aCntFields.reduce((acc, f) => acc + numVal(f), 0);
+      const b6aRev = b6aRevFields.reduce((acc, f) => acc + numVal(f), 0);
+
+      document.getElementById('b6a_total_count').value = hasAnyInput(b6aCntFields) ? b6aCount : '';
+      document.getElementById('b6a_total_rev').value = hasAnyInput(b6aRevFields) ? b6aRev.toFixed(2) : '';
+
+      // Table 11C: POSB Accounts Opened
+      const c11cCntFields = ['c11c_posa_cnt', 'c11c_rd_cnt', 'c11c_td_cnt', 'c11c_ssa_cnt', 'c11c_mis_cnt', 'c11c_ppf_cnt', 'c11c_ippb_cnt'];
+      const c11cAmtFields = ['c11c_posa_amt', 'c11c_rd_amt', 'c11c_td_amt', 'c11c_ssa_amt', 'c11c_mis_amt', 'c11c_ppf_amt', 'c11c_ippb_amt'];
+
+      const c11cCount = c11cCntFields.reduce((acc, f) => acc + numVal(f), 0);
+      const c11cAmt = c11cAmtFields.reduce((acc, f) => acc + numVal(f), 0);
+
+      document.getElementById('c11c_total_cnt').value = hasAnyInput(c11cCntFields) ? c11cCount : '';
+      document.getElementById('c11c_total_amt').value = hasAnyInput(c11cAmtFields) ? c11cAmt.toFixed(2) : '';
+
+      // Table 17A: PLI / RPLI Procurement
+      const e17aPolQtrFields = ['e17a_pli_pol_qtr', 'e17a_rpli_pol_qtr', 'e17a_bjb_pol_qtr'];
+      const e17aSaQtrFields = ['e17a_pli_sa_qtr', 'e17a_rpli_sa_qtr', 'e17a_bjb_sa_qtr'];
+      const e17aPolDliFields = ['e17a_pli_pol_dli', 'e17a_rpli_pol_dli', 'e17a_bjb_pol_dli'];
+      const e17aSaDliFields = ['e17a_pli_sa_dli', 'e17a_rpli_sa_dli', 'e17a_bjb_sa_dli'];
+
+      const e17aPolQtr = e17aPolQtrFields.reduce((acc, f) => acc + numVal(f), 0);
+      const e17aSaQtr = e17aSaQtrFields.reduce((acc, f) => acc + numVal(f), 0);
+      const e17aPolDli = e17aPolDliFields.reduce((acc, f) => acc + numVal(f), 0);
+      const e17aSaDli = e17aSaDliFields.reduce((acc, f) => acc + numVal(f), 0);
+
+      document.getElementById('e17a_tot_pol_qtr').value = hasAnyInput(e17aPolQtrFields) ? e17aPolQtr : '';
+      document.getElementById('e17a_tot_sa_qtr').value = hasAnyInput(e17aSaQtrFields) ? e17aSaQtr.toFixed(2) : '';
+      document.getElementById('e17a_tot_pol_dli').value = hasAnyInput(e17aPolDliFields) ? e17aPolDli : '';
+      document.getElementById('e17a_tot_sa_dli').value = hasAnyInput(e17aSaDliFields) ? e17aSaDli.toFixed(2) : '';
+    }
+
+    // Collect all form data into a flat JSON object
+    function getFormDataObject() {
+      const form = document.getElementById('boVisitForm');
+      const elements = form.querySelectorAll('input, select, textarea');
+      const data = {};
+      elements.forEach(el => {
+        if (!el.name) return;
+        if (el.type === 'checkbox') {
+          data[el.name] = el.checked;
+        } else {
+          data[el.name] = el.value;
+        }
+      });
+      return data;
+    }
+
+    // Populate form from JSON object
+    function setFormDataObject(data) {
+      if (!data || typeof data !== 'object') return;
+      const form = document.getElementById('boVisitForm');
+      const elements = form.querySelectorAll('input, select, textarea');
+      elements.forEach(el => {
+        if (!el.name || !(el.name in data)) return;
+        if (el.type === 'checkbox') {
+          el.checked = Boolean(data[el.name]);
+        } else {
+          el.value = data[el.name];
+        }
+      });
+      calculateAllTotals();
+      updateCompletionProgress();
+    }
+
+    // Save to localStorage
+    function saveDraftToLocal(manual = false) {
+      try {
+        const data = getFormDataObject();
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+        const badge = document.getElementById('saveStatusBadge');
+        const now = new Date();
+        const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+        if (badge) badge.textContent = `Saved ${timeStr}`;
+        if (manual) showToast('Draft saved to browser storage!');
+      } catch (err) {
+        console.error('Local storage error:', err);
+      }
+    }
+
+    // Load from localStorage
+    function loadDraftFromLocal() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return;
+        const data = JSON.parse(raw);
+        setFormDataObject(data);
+      } catch (err) {
+        console.error('Error loading saved draft:', err);
+      }
+    }
+
+    // Update completion bar
+    function updateCompletionProgress() {
+      const form = document.getElementById('boVisitForm');
+      const inputs = Array.from(form.querySelectorAll('input:not([readonly]):not([type="checkbox"]), select, textarea'));
+      const total = inputs.length;
+      if (total === 0) return;
+      const filled = inputs.filter(el => el.value && el.value.trim() !== '').length;
+      const pct = Math.min(100, Math.round((filled / total) * 100));
+      document.getElementById('progressPercent').textContent = `${pct}%`;
+      document.getElementById('progressBar').style.width = `${pct}%`;
+    }
+
+    // Export JSON Backup
+    function exportJsonBackup() {
+      const data = getFormDataObject();
+      const boName = (document.getElementById('a1_bo_name')?.value || 'BO').replace(/[^a-zA-Z0-9_-]/g, '_');
+      const filename = `Dhemaji_BO_Visit_${boName}_Backup.json`;
+      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      showToast('JSON Backup downloaded!');
+    }
+
+    // Import JSON Backup
+    function importJsonBackup(event) {
+      const file = event.target.files?.[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        try {
+          const parsed = JSON.parse(e.target.result);
+          setFormDataObject(parsed);
+          saveDraftToLocal(false);
+          showToast('JSON Backup restored successfully!');
+        } catch (err) {
+          showToast('Invalid JSON backup file.');
+        }
+      };
+      reader.readAsText(file);
+      event.target.value = '';
+    }
+
+    // Reset Modal Controls
+    function openResetModal() {
+      document.getElementById('resetModal').classList.remove('hidden');
+    }
+
+    function closeResetModal() {
+      document.getElementById('resetModal').classList.add('hidden');
+    }
+
+    function confirmResetForm() {
+      localStorage.removeItem(STORAGE_KEY);
+      document.getElementById('boVisitForm').reset();
+      calculateAllTotals();
+      updateCompletionProgress();
+      closeResetModal();
+      showToast('Form cleared.');
+    }
+
+    // Direct PDF Download via html2pdf.js with static text cloning so multi-line textareas & inputs never clip
+    async function downloadDirectPDF() {
+      const btnTop = document.getElementById('btnDirectPdf');
+      const btnBottom = document.getElementById('btnDirectPdfBottom');
+      const origTop = btnTop ? btnTop.innerHTML : '';
+      const origBottom = btnBottom ? btnBottom.innerHTML : '';
+
+      if (btnTop) {
+        btnTop.disabled = true;
+        btnTop.innerHTML = '<span>⏳ Generating PDF...</span>';
+      }
+      if (btnBottom) {
+        btnBottom.disabled = true;
+        btnBottom.innerHTML = '<span>⏳ Generating PDF...</span>';
+      }
+
+      // Build clean filename
+      const rawBoName = document.getElementById('a1_bo_name')?.value?.trim() || 'Branch_Office';
+      const safeBoName = rawBoName.replace(/[^a-zA-Z0-9_-]/g, '_');
+      const datePart = formatTodayDate().replace(/\//g, '-');
+      const pdfFilename = `BO_Visit_Report_${safeBoName}_${datePart}.pdf`;
+
+      // Create an off-screen clone where inputs, selects, and textareas are converted to clean static divs
+      const sourceElement = document.getElementById('printableDocument');
+      const clone = sourceElement.cloneNode(true);
+
+      // Remove any .no-print elements inside the clone
+      clone.querySelectorAll('.no-print').forEach(el => el.remove());
+
+      // Sync values from live DOM into cloned nodes and replace controls with static text blocks
+      const liveControls = sourceElement.querySelectorAll('input, select, textarea');
+      const cloneControls = clone.querySelectorAll('input, select, textarea');
+
+      liveControls.forEach((liveEl, idx) => {
+        const cloneEl = cloneControls[idx];
+        if (!cloneEl) return;
+
+        let displayVal = '';
+        if (liveEl.tagName === 'SELECT') {
+          const selectedOpt = liveEl.options[liveEl.selectedIndex];
+          displayVal = (selectedOpt && liveEl.value !== '') ? selectedOpt.text : '';
+        } else {
+          displayVal = liveEl.value || '';
+        }
+
+        const staticBox = document.createElement('div');
+        staticBox.style.minHeight = liveEl.tagName === 'TEXTAREA' ? '28px' : '18px';
+        staticBox.style.padding = '2px 4px';
+        staticBox.style.borderBottom = '1px dotted #64748b';
+        staticBox.style.fontSize = '11px';
+        staticBox.style.lineHeight = '1.35';
+        staticBox.style.color = '#0f172a';
+        staticBox.style.whiteSpace = 'pre-wrap';
+        staticBox.style.wordBreak = 'break-word';
+        if (liveEl.hasAttribute('readonly')) {
+          staticBox.style.fontWeight = '700';
+        }
+        staticBox.textContent = displayVal;
+
+        cloneEl.parentNode.replaceChild(staticBox, cloneEl);
+      });
+
+      // Style clone container for crisp A4 rendering
+      const wrapper = document.createElement('div');
+      wrapper.style.width = '190mm';
+      wrapper.style.margin = '0 auto';
+      wrapper.style.backgroundColor = '#ffffff';
+      wrapper.style.color = '#000000';
+      wrapper.style.padding = '2mm';
+      wrapper.appendChild(clone);
+
+      // Temporary offscreen mount for html2canvas
+      const hiddenHost = document.createElement('div');
+      hiddenHost.style.position = 'fixed';
+      hiddenHost.style.left = '-9999px';
+      hiddenHost.style.top = '0';
+      hiddenHost.style.zIndex = '-1';
+      hiddenHost.appendChild(wrapper);
+      document.body.appendChild(hiddenHost);
+
+      const opt = {
+        margin: [8, 8, 10, 8],
+        filename: pdfFilename,
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: {
+          scale: 2,
+          useCORS: true,
+          letterRendering: true,
+          scrollY: 0
+        },
+        jsPDF: {
+          unit: 'mm',
+          format: 'a4',
+          orientation: 'portrait'
+        },
+        pagebreak: { mode: ['css', 'legacy'] }
+      };
+
+      try {
+        await html2pdf().set(opt).from(wrapper).save();
+        showToast(`Downloaded ${pdfFilename}`);
+      } catch (err) {
+        console.error('PDF generation error:', err);
+        showToast('Error generating PDF file.');
+      } finally {
+        document.body.removeChild(hiddenHost);
+        if (btnTop) {
+          btnTop.disabled = false;
+          btnTop.innerHTML = origTop;
+        }
+        if (btnBottom) {
+          btnBottom.disabled = false;
+          btnBottom.innerHTML = origBottom;
+        }
+      }
+    }
+  </script>
+</body>
+</html>
